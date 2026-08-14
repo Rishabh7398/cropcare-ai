@@ -1,3 +1,5 @@
+from datetime import datetime
+from zoneinfo import ZoneInfo
 import streamlit as st
 import numpy as np
 import json
@@ -124,7 +126,7 @@ def generate_pdf_report(original_img, gradcam_img, disease_name, confidence, top
     pdf.set_font("Helvetica", "B", 18)
     pdf.cell(0, 12, "CropCare AI - Diagnosis Report", ln=True, align="C")
     pdf.set_font("Helvetica", "", 10)
-    pdf.cell(0, 8, datetime.now().strftime("Generated on %B %d, %Y at %I:%M %p"), ln=True, align="C")
+    pdf.cell(0, 8, datetime.now(ZoneInfo("Asia/Kolkata")).strftime("Generated on %B %d, %Y at %I:%M %p"), ln=True, align="C")
     pdf.ln(6)
 
     pdf.image(orig_path, x=20, y=pdf.get_y(), w=80)
@@ -161,7 +163,7 @@ def save_to_history(disease_name, confidence):
         writer = csv.writer(f)
         if not file_exists:
             writer.writerow(["timestamp", "disease", "confidence"])
-        writer.writerow([datetime.now().strftime("%Y-%m-%d %H:%M:%S"), clean_name, confidence])
+        writer.writerow([datetime.now(ZoneInfo("Asia/Kolkata")).strftime("%Y-%m-%d %H:%M:%S"), clean_name, confidence])
 
 
 def load_history():
