@@ -1,0 +1,8 @@
+streamlit
+tensorflow
+numpy
+pillow
+groq
+opencv-python-headless
+fpdf2
+pandas
